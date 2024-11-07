@@ -9,10 +9,10 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>hu.unideb.inf.sfm</groupId>
-    <artifactId>BAU_JAVAFX</artifactId>
+    <artifactId>BAU</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>BAU_JAVAFX</name>
-    <description>BAU_JAVAFX</description>
+    <name>BAU</name>
+    <description>BAU</description>
     <url/>
     <licenses>
         <license/>
@@ -27,7 +27,7 @@
         <url/>
     </scm>
     <properties>
-        <java.version>17</java.version>
+        <java.version>23</java.version>
     </properties>
     <dependencies>
         <dependency>
@@ -50,6 +50,16 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-controls</artifactId>
+            <version>23.0.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-fxml</artifactId>
+            <version>23.0.1</version>
+        </dependency>
     </dependencies>
 
     <build>
@@ -64,6 +74,14 @@
                             <artifactId>lombok</artifactId>
                         </exclude>
                     </excludes>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.openjfx</groupId>
+                <artifactId>javafx-maven-plugin</artifactId>
+                <version>0.0.8</version>
+                <configuration>
+                    <mainClass>hu.unideb.inf.sfm.bau_javafx.frontend.JavaFXMain</mainClass>
                 </configuration>
             </plugin>
         </plugins>
