@@ -9,15 +9,16 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 
 public class LoginController {
-    @Value("${SITE_MANAGER}")
-    private String manager;
-
     Stage stage;
 
     @FXML
@@ -40,12 +41,11 @@ public class LoginController {
     }
 
     @FXML
-    void login(ActionEvent event) {
+    void login(ActionEvent event) throws Exception {
         loginCheck(username.getText(), password.getText());
     }
 
-    void loginCheck(String username, String password)
-    {
+    void loginCheck(String username, String password) throws Exception {
         if(username.isEmpty() || password.isEmpty()) {
             new Alerts().LoginAlert("Kötelező kitölteni mindkét mezőt!");
             return;
@@ -60,76 +60,61 @@ public class LoginController {
             new Alerts().LoginAlert("Hibás bejelentkezési adatok!");
             return;
         }
-        if (username.equals(manager))
+        if (user.getUsertype().name().equals("MANAGER"))
         {
-            openManager((Stage) login_button.getScene().getWindow());
+            startManager((Stage) login_button.getScene().getWindow());
         }
         else{
-            openDoctor((Stage) login_button.getScene().getWindow());
+            startDoctor((Stage) login_button.getScene().getWindow());
         }
     }
 
-    public void openDoctor(Stage currentStage) {
+    public void startDoctor(Stage stage) throws Exception{
         try {
-            // Load the FXML file
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("DoctorFXML.fxml"));
+            // Load the DoctorFXML file
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml_files/DoctorFXML.fxml"));
             Parent root = fxmlLoader.load();
 
-            // Create and configure the new stage
-            Stage stage = new Stage();
-            stage.setTitle("BAU");
-            Scene scene = new Scene(root);
-            stage.setScene(scene);
-            stage.setMaximized(true);
+            // Create a new stage and set the scene
+            Stage doctorStage = new Stage();
+            doctorStage.setTitle("BAU Doktor nézet");
+            doctorStage.setScene(new Scene(root));
 
-            // Set the icon for the new stage
-            Image image = new Image(LoginController.class.getResourceAsStream("images/baulog.png"));
-            stage.getIcons().add(image);
+            Image image = new Image(getClass().getResourceAsStream("/images/baulog.png"));
+            doctorStage.getIcons().add(image);
 
-            // Show the new stage
-            stage.show();
+            doctorStage.show();
 
-            // Close the provided current stage
-            currentStage.close();
-
+            // Close the current stage (Login)
+            stage.close();
         } catch (IOException e) {
-            System.err.println("Error loading FXML file: " + e.getMessage());
-            e.printStackTrace();
-        } catch (Exception e) {
-            System.err.println("An unexpected error occurred: " + e.getMessage());
+            System.err.println("Error loading DoctorFXML: " + e.getMessage());
             e.printStackTrace();
         }
     }
 
-    public void openManager(Stage currentStage) {
+    public void startManager(Stage stage) throws Exception{
         try {
-            // Load the FXML file
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("ManagerFXML.fxml"));
+            // Load the ManagerFXML file
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml_files/ManagerFXML.fxml"));
             Parent root = fxmlLoader.load();
 
-            // Create and configure the new stage
-            Stage stage = new Stage();
-            stage.setTitle("BAU");
-            Scene scene = new Scene(root);
-            stage.setScene(scene);
-            stage.setMaximized(true);
+            // Create a new stage and set the scene
+            Stage managerStage = new Stage();
+            managerStage.setTitle("BAU Menedzser nézet");
+            managerStage.setScene(new Scene(root));
 
-            // Set the icon for the new stage
-            Image image = new Image(LoginController.class.getResourceAsStream("images/baulog.png"));
-            stage.getIcons().add(image);
+            Image image = new Image(getClass().getResourceAsStream("/images/baulog.png"));
+            managerStage.getIcons().add(image);
 
-            // Show the new stage
-            stage.show();
+            managerStage.show();
 
-            // Close the provided current stage
-            currentStage.close();
-
+            // Close the current stage (Login)
+            stage.close();
         } catch (IOException e) {
-            System.err.println("Error loading FXML file: " + e.getMessage());
-            e.printStackTrace();
-        } catch (Exception e) {
-            System.err.println("An unexpected error occurred: " + e.getMessage());
+            System.err.println("Error loading ManagerFXML: " + e.getMessage());
             e.printStackTrace();
         }
     }
+
 }
