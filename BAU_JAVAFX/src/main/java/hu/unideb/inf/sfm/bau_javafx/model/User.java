@@ -5,7 +5,6 @@ import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.Id;
 import org.mindrot.jbcrypt.BCrypt;
-import org.springframework.beans.factory.annotation.Value;
 
 @Entity
 public class User {
@@ -15,6 +14,7 @@ public class User {
     private String surname;
     private String forename;
     private Integer registrationNumber;
+    private boolean resetPassword;
 
     @Enumerated(EnumType.STRING)
     private usertype usertype;
@@ -23,7 +23,9 @@ public class User {
         DOCTOR, MANAGER
     }
 
-    public User() {}
+    public User() {
+        this.resetPassword = true;
+    }
 
     public User(String username, String password, String surname, String forename, Integer registrationNumber, usertype usertype) {
         this.username = username;
@@ -32,6 +34,7 @@ public class User {
         this.forename = forename;
         this.registrationNumber = registrationNumber;
         this.usertype = usertype;
+        this.resetPassword = true;
     }
 
     public boolean checkPassword(String plainPassword) {
@@ -51,7 +54,7 @@ public class User {
     }
 
     public void setPassword(String password) {
-        this.password = password;
+        this.password =  BCrypt.hashpw(password, BCrypt.gensalt(12));
     }
 
     public String getSurname() {
@@ -84,5 +87,13 @@ public class User {
 
     public void setUsertype(User.usertype usertype) {
         this.usertype = usertype;
+    }
+
+    public boolean isResetPassword() {
+        return resetPassword;
+    }
+
+    public void setResetPassword(boolean resetPassword) {
+        this.resetPassword = resetPassword;
     }
 }

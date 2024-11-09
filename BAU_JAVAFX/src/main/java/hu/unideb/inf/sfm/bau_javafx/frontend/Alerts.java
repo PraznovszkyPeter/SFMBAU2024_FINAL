@@ -31,6 +31,26 @@ public class Alerts {
         alert.showAndWait();
     }
 
+    public void ResetPasswordAlert()
+    {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Jelszóváltozás");
+        alert.setHeaderText("Üdvözöljük! Változtassa meg jelszavát!");
+        alert.setContentText(message);
+        alert.getButtonTypes().setAll(new ButtonType("Bezárás"));
+        alert.showAndWait();
+    }
+
+    public void LoginAfterPasswordSetting()
+    {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Jelszóváltozás");
+        alert.setHeaderText("Kérjük lépjen be az új jelszavával!");
+        alert.setContentText(message);
+        alert.getButtonTypes().setAll(new ButtonType("Bezárás"));
+        alert.showAndWait();
+    }
+
     public void VisitAlert(String header, String message) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Vizsgálat lezárása");

@@ -9,12 +9,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 
@@ -58,6 +53,19 @@ public class LoginController {
         }
         if (!user.checkPassword(password)) {
             new Alerts().LoginAlert("Hibás bejelentkezési adatok!");
+            return;
+        }
+        if (user.isResetPassword())
+        {
+            new Alerts().ResetPasswordAlert();
+            user.setPassword(Password.SetPassword("Adja meg az új jelszavát!"));
+            user.setResetPassword(false);
+            if (!JavaFXMain.manager.saveUser(user)) {
+                new Alerts().ErrorAlert("Mentési hiba","Nem sikerült elmenteni a változásokat! Próbálja később");
+                return;
+            }
+            this.password.setText("");
+            new Alerts().LoginAfterPasswordSetting();
             return;
         }
         if (user.getUsertype().name().equals("MANAGER"))
