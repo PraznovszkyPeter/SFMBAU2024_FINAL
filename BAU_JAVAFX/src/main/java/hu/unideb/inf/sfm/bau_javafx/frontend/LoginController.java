@@ -4,7 +4,6 @@ import hu.unideb.inf.sfm.bau_javafx.model.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -18,6 +17,7 @@ import java.io.IOException;
 public class LoginController {
     @Value("${SITE_MANAGER}")
     private String manager;
+
     Stage stage;
 
     @FXML
@@ -56,13 +56,13 @@ public class LoginController {
             new Alerts().LoginAlert("Nem létezik "+username+" nevű felhasználó!");
             return;
         }
-        if (!user.getPassword().equals(password)) {
+        if (!user.checkPassword(password)) {
             new Alerts().LoginAlert("Hibás bejelentkezési adatok!");
             return;
         }
         if (username.equals(manager))
         {
-            System.out.println("This will load Manager View");
+            openManager((Stage) login_button.getScene().getWindow());
         }
         else{
             openDoctor((Stage) login_button.getScene().getWindow());
@@ -101,4 +101,35 @@ public class LoginController {
         }
     }
 
+    public void openManager(Stage currentStage) {
+        try {
+            // Load the FXML file
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("ManagerFXML.fxml"));
+            Parent root = fxmlLoader.load();
+
+            // Create and configure the new stage
+            Stage stage = new Stage();
+            stage.setTitle("BAU");
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.setMaximized(true);
+
+            // Set the icon for the new stage
+            Image image = new Image(LoginController.class.getResourceAsStream("images/baulog.png"));
+            stage.getIcons().add(image);
+
+            // Show the new stage
+            stage.show();
+
+            // Close the provided current stage
+            currentStage.close();
+
+        } catch (IOException e) {
+            System.err.println("Error loading FXML file: " + e.getMessage());
+            e.printStackTrace();
+        } catch (Exception e) {
+            System.err.println("An unexpected error occurred: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
 }
