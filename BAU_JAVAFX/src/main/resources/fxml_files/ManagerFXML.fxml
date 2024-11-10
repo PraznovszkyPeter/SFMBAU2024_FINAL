@@ -64,7 +64,7 @@
                         <ButtonBar layoutX="9.0" layoutY="344.0" prefHeight="40.0" prefWidth="502.0">
                             <buttons>
                                 <Button mnemonicParsing="false" onAction="#CreateUser" text="Új létrehozása" />
-                        <Button mnemonicParsing="false" onAction="#resetPassword" text="Jelszóvisszaállítás" />
+                        <Button fx:id="resetButton" mnemonicParsing="false" onAction="#resetPassword" text="Jelszóvisszaállítás" />
                                 <Button mnemonicParsing="false" onAction="#EditUser" text="Szerkesztés" />
                                 <Button mnemonicParsing="false" onAction="#DeleteUser" text="Törlés" />
                             </buttons>

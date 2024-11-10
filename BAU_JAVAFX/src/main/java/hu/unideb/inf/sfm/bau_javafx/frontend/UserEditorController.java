@@ -31,6 +31,11 @@ public class UserEditorController {
     private Button saveButton;
 
     private User user = null;
+    private ManagerController managerController;
+
+    public void setManagerController(ManagerController managerController) {
+        this.managerController = managerController;
+    }
 
     @FXML
     void Cancel(ActionEvent event) {
@@ -44,14 +49,18 @@ public class UserEditorController {
         this.user.setForename(forenameText.getText());
         this.user.setSurname(surnameText.getText());
         this.user.setUsertype(userTypes.getValue());
-        System.out.println(Integer.valueOf(registrationNumber.getText()));
-        this.user.setRegistrationNumber(Integer.valueOf(registrationNumber.getText()));
+        this.user.setRegistrationNumber(registrationNumber.getText().isEmpty() ? null : Integer.valueOf(registrationNumber.getText().trim()));
 
         if (this.user.getPassword() == null) {
             this.user.setPassword(SetPassword("Adja meg a létrejövő felhasználó jelszavát!"));
         }
 
         JavaFXMain.manager.saveUser(this.user);
+
+        if (managerController != null) {
+            managerController.reloadUsers();
+            managerController.resetUserListTimer();
+        }
 
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.close();
@@ -71,17 +80,21 @@ public class UserEditorController {
         surnameText.textProperty().addListener((observable, oldValue, newValue) -> checkFields());
         forenameText.textProperty().addListener((observable, oldValue, newValue) -> checkFields());
         registrationNumber.textProperty().addListener((observable, oldValue, newValue) -> checkFields());
+        userTypes.valueProperty().addListener((observable, oldValue, newValue) -> checkFields());
     }
 
     private void checkFields() {
         // Check if all required fields are non-empty
-        boolean allFieldsFilled = !usernameText.getText().isEmpty() &&
-                !surnameText.getText().isEmpty() &&
-                !forenameText.getText().isEmpty() &&
-                (userTypes.getValue() == User.usertype.MANAGER ? true : isNumber(registrationNumber.getText()));
+        boolean allFieldsFilled = !isNullOrBlank(usernameText.getText()) &&
+                !isNullOrBlank(surnameText.getText()) &&
+                !isNullOrBlank(forenameText.getText()) &&
+                (userTypes.getValue() == User.usertype.MANAGER || isNumber(registrationNumber.getText()));
 
         // Enable or disable the Save button based on whether all fields are filled
         saveButton.setDisable(!allFieldsFilled);
+    }
+    private boolean isNullOrBlank(String text) {
+        return text == null || text.trim().isEmpty();
     }
 
     private boolean isNumber(String text) {

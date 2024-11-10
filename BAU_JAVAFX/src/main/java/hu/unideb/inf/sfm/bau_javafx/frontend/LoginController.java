@@ -40,6 +40,27 @@ public class LoginController {
         loginCheck(username.getText(), password.getText());
     }
 
+    @FXML
+    void resetPassword(ActionEvent event) {
+        String uname = username.getText();
+        if(uname.isEmpty()) {
+            new Alerts().LoginAlert("Kötelező kitölteni a felhasználónév mezőt a beazonosításhoz!");
+            return;
+        }
+        User user = JavaFXMain.manager.getUser(uname);
+        if (user == null) {
+            new Alerts().LoginAlert("Nem létezik " + uname + " nevű felhasználó!");
+            return;
+        }
+        user.setResetPassword(true);
+        if (!JavaFXMain.manager.saveUser(user)) {
+            new Alerts().ErrorAlert("Mentési hiba","Nem sikerült elmenteni a változásokat! Próbálja később");
+            return;
+        }
+        new Alerts().InformationAlert("Rendszergazda értesítve", "Kérjük várja meg, míg a rendszergazda beállít egy ideiglenes jelszót!");
+        return;
+    }
+
     void loginCheck(String username, String password) throws Exception {
         if(username.isEmpty() || password.isEmpty()) {
             new Alerts().LoginAlert("Kötelező kitölteni mindkét mezőt!");
@@ -57,15 +78,14 @@ public class LoginController {
         }
         if (user.isResetPassword())
         {
-            new Alerts().ResetPasswordAlert();
-            user.setPassword(Password.SetPassword("Adja meg az új jelszavát!"));
-            user.setResetPassword(false);
-            if (!JavaFXMain.manager.saveUser(user)) {
-                new Alerts().ErrorAlert("Mentési hiba","Nem sikerült elmenteni a változásokat! Próbálja később");
-                return;
-            }
+            new Alerts().ResetPasswordAlert(user);
             this.password.setText("");
-            new Alerts().LoginAfterPasswordSetting();
+            return;
+        }
+        if (user.isFirstLogin())
+        {
+            new Alerts().FirstLoginAlert(user);
+            this.password.setText("");
             return;
         }
         if (user.getUsertype().name().equals("MANAGER"))
@@ -101,28 +121,29 @@ public class LoginController {
         }
     }
 
-    public void startManager(Stage stage) throws Exception{
+    public void startManager(Stage stage) throws Exception {
         try {
-            // Load the ManagerFXML file
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml_files/ManagerFXML.fxml"));
             Parent root = fxmlLoader.load();
 
-            // Create a new stage and set the scene
             Stage managerStage = new Stage();
             managerStage.setTitle("BAU Menedzser nézet");
             managerStage.setScene(new Scene(root));
 
             Image image = new Image(getClass().getResourceAsStream("/images/baulog.png"));
             managerStage.getIcons().add(image);
-
             managerStage.show();
 
             // Close the current stage (Login)
             stage.close();
+            ManagerController mc = new ManagerController();
+            // Now set up the close event on the new stage
+            mc.setStage(managerStage);  // Make sure this is called on the newly created stage
         } catch (IOException e) {
             System.err.println("Error loading ManagerFXML: " + e.getMessage());
             e.printStackTrace();
         }
     }
+
 
 }

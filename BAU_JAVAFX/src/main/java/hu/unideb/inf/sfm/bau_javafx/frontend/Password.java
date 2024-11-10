@@ -36,6 +36,9 @@ public class Password {
             if (response == saveButton) {
                 password[0] = passwordField.getText();
             }
+            else{
+                password[0] = null;
+            }
         });
 
         // Return the password after the alert is closed
