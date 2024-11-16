@@ -51,8 +51,8 @@ public class SpringManager implements Manager{
     }
 
     @Override
-    public List<User> getUsers() {
+    public List<User> getUsers(String username) {
         UserRepository userRepository = (UserRepository) context.getBean(UserRepository.class);
-        return userRepository.findAll();
+        return userRepository.findAllExcludingUser(username);
     }
 }

@@ -3,6 +3,9 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ButtonBar?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
@@ -14,7 +17,22 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hu.unideb.inf.sfm.bau_javafx.frontend.ManagerController">
     <children>
-        <SplitPane dividerPositions="0.29797979797979796" layoutX="136.0" layoutY="102.0" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <MenuBar layoutY="-12.0" prefHeight="400.0" prefWidth="750.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <menus>
+          <Menu mnemonicParsing="false" text="Saját adatok">
+            <items>
+              <MenuItem mnemonicParsing="false" onAction="#showMyData" text="Megváltoztatás" />
+                  <MenuItem mnemonicParsing="false" onAction="#changePassword" text="Jelszóváltoztatás" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Frissítés">
+            <items>
+              <MenuItem mnemonicParsing="false" onAction="#reloadData" text="Adatbázisból lekérés" />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
+        <SplitPane dividerPositions="0.29797979797979796" layoutX="136.0" layoutY="102.0" prefHeight="400.0" prefWidth="750.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="25.0">
             <items>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                     <children>
@@ -61,7 +79,7 @@
                         <Label fx:id="userType" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                             </children>
                         </GridPane>
-                        <ButtonBar layoutX="9.0" layoutY="344.0" prefHeight="40.0" prefWidth="502.0">
+                        <ButtonBar layoutX="9.0" layoutY="344.0" prefHeight="40.0" prefWidth="502.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="335.0">
                             <buttons>
                                 <Button mnemonicParsing="false" onAction="#CreateUser" text="Új létrehozása" />
                         <Button fx:id="resetButton" mnemonicParsing="false" onAction="#resetPassword" text="Jelszóvisszaállítás" />

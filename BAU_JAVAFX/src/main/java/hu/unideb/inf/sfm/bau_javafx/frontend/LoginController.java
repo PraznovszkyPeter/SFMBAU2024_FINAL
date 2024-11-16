@@ -90,7 +90,7 @@ public class LoginController {
         }
         if (user.getUsertype().name().equals("MANAGER"))
         {
-            startManager((Stage) login_button.getScene().getWindow());
+            startManager((Stage) login_button.getScene().getWindow(), user);
         }
         else{
             startDoctor((Stage) login_button.getScene().getWindow());
@@ -121,10 +121,13 @@ public class LoginController {
         }
     }
 
-    public void startManager(Stage stage) throws Exception {
+    public void startManager(Stage stage, User user) throws Exception {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml_files/ManagerFXML.fxml"));
             Parent root = fxmlLoader.load();
+
+            ManagerController managerController = fxmlLoader.getController();
+            managerController.setLoggedInUser(user);
 
             Stage managerStage = new Stage();
             managerStage.setTitle("BAU Menedzser nézet");
@@ -134,11 +137,7 @@ public class LoginController {
             managerStage.getIcons().add(image);
             managerStage.show();
 
-            // Close the current stage (Login)
             stage.close();
-            ManagerController mc = new ManagerController();
-            // Now set up the close event on the new stage
-            mc.setStage(managerStage);  // Make sure this is called on the newly created stage
         } catch (IOException e) {
             System.err.println("Error loading ManagerFXML: " + e.getMessage());
             e.printStackTrace();

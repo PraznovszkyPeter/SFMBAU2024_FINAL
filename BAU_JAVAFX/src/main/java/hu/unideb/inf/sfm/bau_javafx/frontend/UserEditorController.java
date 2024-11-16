@@ -1,5 +1,6 @@
 package hu.unideb.inf.sfm.bau_javafx.frontend;
 
+import hu.unideb.inf.sfm.bau_javafx.db.Manager;
 import hu.unideb.inf.sfm.bau_javafx.model.User;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
@@ -31,11 +32,6 @@ public class UserEditorController {
     private Button saveButton;
 
     private User user = null;
-    private ManagerController managerController;
-
-    public void setManagerController(ManagerController managerController) {
-        this.managerController = managerController;
-    }
 
     @FXML
     void Cancel(ActionEvent event) {
@@ -56,11 +52,8 @@ public class UserEditorController {
         }
 
         JavaFXMain.manager.saveUser(this.user);
-
-        if (managerController != null) {
-            managerController.reloadUsers();
-            managerController.resetUserListTimer();
-        }
+        ManagerController managerController = new ManagerController();
+        managerController.reloadUsers();
 
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.close();

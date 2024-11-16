@@ -10,5 +10,5 @@ public interface Manager {
     public boolean saveUser(User user);
     public boolean DeleteUser(User user);
     public User getUser(String username);
-    public List<User> getUsers();
+    public List<User> getUsers(String username);
 }

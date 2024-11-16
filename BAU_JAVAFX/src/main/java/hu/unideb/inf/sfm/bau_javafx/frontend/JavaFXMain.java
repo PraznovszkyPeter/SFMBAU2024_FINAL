@@ -27,14 +27,8 @@ public class JavaFXMain extends Application {
         clip.setArcHeight(40);
         root.setClip(clip);
         stage.initStyle(StageStyle.TRANSPARENT);
-
-        stage.setOnCloseRequest(event -> {
-            Platform.exit();  // Exit the JavaFX Application
-            System.exit(0);   // Ensure JVM terminates
-        });
-
-
         stage.show();
+
         manager.start();
     }
 }
