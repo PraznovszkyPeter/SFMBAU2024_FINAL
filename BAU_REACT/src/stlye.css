@@ -64,3 +64,60 @@ body {
 .navbar .link:hover {
     color: #94dda4;
 }
+
+
+.orvosok {
+    padding: 2rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 3rem;
+    justify-content: center;
+}
+
+.orvosok div {
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    width: 400px; 
+    padding: 1.5rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+@media (max-width: 768px) {
+    .orvosok div {
+        width: 100%; 
+    }
+}
+
+
+.orvosok div:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+}
+
+.orvosok h2 {
+    margin: 0 0 1rem;
+    font-size: 1.5rem;
+    color: #169222;
+}
+
+.orvosok p {
+    margin: 0.5rem 0;
+    font-size: 1rem;
+    color: #555;
+}
+
+a {
+    color: inherit;
+}
+
+
+.orvos-kep {
+    width: 100%; 
+    height: 250px; 
+    object-fit: cover; 
+    margin-top: 1rem; 
+    border-radius: 8px; 
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
