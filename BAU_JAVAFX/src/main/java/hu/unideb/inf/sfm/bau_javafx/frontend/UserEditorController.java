@@ -1,16 +1,15 @@
 package hu.unideb.inf.sfm.bau_javafx.frontend;
 
-import hu.unideb.inf.sfm.bau_javafx.db.Manager;
 import hu.unideb.inf.sfm.bau_javafx.model.User;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-
 import static hu.unideb.inf.sfm.bau_javafx.frontend.Password.SetPassword;
-
 
 public class UserEditorController {
     @FXML
@@ -64,9 +63,9 @@ public class UserEditorController {
         saveButton.setDisable(true);
 
         userTypes.setItems(FXCollections.observableArrayList(User.usertype.values()));
-        userTypes.setValue(User.usertype.DOCTOR); // or whatever is suitable as the default
+        userTypes.setValue(User.usertype.DOCTOR);
         userTypes.valueProperty().addListener((observable, oldValue, newValue) -> {
-            handleUserTypeSelection(newValue); // Call method to handle the logic when value changes
+            handleUserTypeSelection(newValue);
         });
 
         usernameText.textProperty().addListener((observable, oldValue, newValue) -> checkFields());
@@ -77,36 +76,32 @@ public class UserEditorController {
     }
 
     private void checkFields() {
-        // Check if all required fields are non-empty
         boolean allFieldsFilled = !isNullOrBlank(usernameText.getText()) &&
                 !isNullOrBlank(surnameText.getText()) &&
                 !isNullOrBlank(forenameText.getText()) &&
                 (userTypes.getValue() == User.usertype.MANAGER || isNumber(registrationNumber.getText()));
 
-        // Enable or disable the Save button based on whether all fields are filled
         saveButton.setDisable(!allFieldsFilled);
     }
+
     private boolean isNullOrBlank(String text) {
         return text == null || text.trim().isEmpty();
     }
 
     private boolean isNumber(String text) {
         try {
-            Integer.parseInt(text);  // Try to parse the text as an integer
-            return true;  // If it is a valid integer, set isNumber to true
+            Integer.parseInt(text);
+            return true;
         } catch (NumberFormatException e) {
-            return false;  // If it's not a valid integer, catch the exception and set isNumber to false
+            return false;
         }
     }
 
-
     private void handleUserTypeSelection(User.usertype selectedType) {
         if (selectedType == User.usertype.MANAGER) {
-            // Disable registration number if 'MANAGER' is selected
             registrationNumber.setDisable(true);
             registrationNumber.setText("");
         } else {
-            // Enable registration number if 'DOCTOR' or other value is selected
             registrationNumber.setDisable(false);
         }
     }

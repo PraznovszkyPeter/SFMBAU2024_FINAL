@@ -14,16 +14,13 @@ public class Password {
         alert.setTitle("Jelszóbeállítás");
         alert.setHeaderText(message);
 
-        //Adding a passwordField
         PasswordField passwordField = new PasswordField();
         passwordField.setPromptText("Jelszó");
         alert.getDialogPane().setContent(passwordField);
 
-        //Only 1 button, called Save ("Mentés")
         ButtonType saveButton = new ButtonType("Mentés");
         alert.getButtonTypes().setAll(saveButton);
 
-        //Disable button, until the password is least 8 character
         alert.getDialogPane().lookupButton(saveButton).setDisable(true);
         passwordField.textProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue.length() >= 8) {
@@ -41,7 +38,6 @@ public class Password {
             }
         });
 
-        // Return the password after the alert is closed
         return password[0];
     }
 
@@ -59,7 +55,6 @@ public class Password {
         ButtonType saveButton = new ButtonType("Ellenőrzés");
         alert.getButtonTypes().setAll(saveButton);
 
-        //Disable button, until the password is least 8 character
         alert.getDialogPane().lookupButton(saveButton).setDisable(true);
         passwordField.textProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue.length() >= 8) {

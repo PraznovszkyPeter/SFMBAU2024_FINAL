@@ -24,10 +24,10 @@
                     <items>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                             <children>
-                                <TableView prefHeight="372.8" prefWidth="175.2" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                <TableView fx:id="appointmentTable" prefHeight="372.8" prefWidth="175.2" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                     <columns>
-                                        <TableColumn prefWidth="75.0" text="Időpont" />
-                                        <TableColumn prefWidth="75.0" text="Állattartó neve" />
+                                        <TableColumn fx:id="visitDateColumn" prefWidth="75.0" text="Időpont" />
+                                        <TableColumn fx:id="keeperNameColumn" prefWidth="75.0" text="Állattartó neve" />
                                     </columns>
                                     <columnResizePolicy>
                                         <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
@@ -75,22 +75,22 @@
                                                                         <Font size="24.0" />
                                                                     </font>
                                                                 </Label>
-                                                                <Label fx:id="allatFaj" textAlignment="CENTER" GridPane.columnIndex="1">
+                                                                <Label fx:id="animalSpecies" textAlignment="CENTER" GridPane.columnIndex="1">
                                                                     <font>
                                                                         <Font size="18.0" />
                                                                     </font>
                                                                 </Label>
-                                                                <Label fx:id="allatSzam" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                                                <Label fx:id="numberOfAnimals" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="1">
                                                                     <font>
                                                                         <Font size="18.0" />
                                                                     </font>
                                                                 </Label>
-                                                                <Label fx:id="kertVizsgalat" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                                                <Label fx:id="requestedInspcetion" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="2">
                                                                     <font>
                                                                         <Font size="18.0" />
                                                                     </font>
                                                                 </Label>
-                                                                <Label fx:id="megjegyzes" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                                                                <Label fx:id="comments" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="3">
                                                                     <font>
                                                                         <Font size="18.0" />
                                                                     </font>
@@ -131,17 +131,17 @@
                                                                         <Font size="24.0" />
                                                                     </font>
                                                                 </Label>
-                                                                <Label fx:id="gazdaNev" GridPane.columnIndex="1">
+                                                                <Label fx:id="keeperName" GridPane.columnIndex="1">
                                                                     <font>
                                                                         <Font size="24.0" />
                                                                     </font>
                                                                 </Label>
-                                                                <Label fx:id="emailCim" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                                                <Label fx:id="keeperEmail" GridPane.columnIndex="1" GridPane.rowIndex="1">
                                                                     <font>
                                                                         <Font size="24.0" />
                                                                     </font>
                                                                 </Label>
-                                                                <Label fx:id="telefonszam" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                                                <Label fx:id="keeperMobile" GridPane.columnIndex="1" GridPane.rowIndex="2">
                                                                     <font>
                                                                         <Font size="24.0" />
                                                                     </font>
@@ -164,7 +164,8 @@
                     <menus>
                         <Menu mnemonicParsing="false" text="Orvos">
                             <items>
-                                <MenuItem mnemonicParsing="false" onAction="#showDoctor" text="Adatok megváltoztatása" />
+                                <MenuItem mnemonicParsing="false" onAction="#EditMyData" text="Adatok megváltoztatása" />
+                        <MenuItem mnemonicParsing="false" onAction="#ChangePassword" text="Jelszóváltoztatás" />
                             </items>
                         </Menu>
                         <Menu mnemonicParsing="false" text="Vizsgálat">

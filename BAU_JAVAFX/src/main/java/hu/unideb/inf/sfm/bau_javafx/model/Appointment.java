@@ -5,12 +5,13 @@ import jakarta.persistence.Id;
 import lombok.Builder;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Builder
 @Entity
 public class Appointment {
     @Id
-    private LocalDate appointmentDate;
+    private LocalDateTime appointmentDate;
     private String species;
     private int numberOfAnimals;
     private examination examinationType;
@@ -26,7 +27,7 @@ public class Appointment {
     public Appointment() {
     }
 
-    public Appointment(LocalDate appointmentDate, String species, int numberOfAnimals, examination examinationType, String comment, String keeperName, String email, String phoneNumber) {
+    public Appointment(LocalDateTime appointmentDate, String species, int numberOfAnimals, examination examinationType, String comment, String keeperName, String email, String phoneNumber) {
         this.appointmentDate = appointmentDate;
         this.species = species;
         this.numberOfAnimals = numberOfAnimals;
@@ -37,11 +38,11 @@ public class Appointment {
         this.phoneNumber = phoneNumber;
     }
 
-    public LocalDate getAppointmentDate() {
+    public LocalDateTime getAppointmentDate() {
         return appointmentDate;
     }
 
-    public void setAppointmentDate(LocalDate appointmentDate) {
+    public void setAppointmentDate(LocalDateTime appointmentDate) {
         this.appointmentDate = appointmentDate;
     }
 

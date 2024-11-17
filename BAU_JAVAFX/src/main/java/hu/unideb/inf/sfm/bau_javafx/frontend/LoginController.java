@@ -10,7 +10,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
-
 import java.io.IOException;
 
 public class LoginController {
@@ -43,7 +42,7 @@ public class LoginController {
     @FXML
     void resetPassword(ActionEvent event) {
         String uname = username.getText();
-        if(uname.isEmpty()) {
+        if (uname.isEmpty()) {
             new Alerts().LoginAlert("Kötelező kitölteni a felhasználónév mezőt a beazonosításhoz!");
             return;
         }
@@ -54,7 +53,7 @@ public class LoginController {
         }
         user.setResetPassword(true);
         if (!JavaFXMain.manager.saveUser(user)) {
-            new Alerts().ErrorAlert("Mentési hiba","Nem sikerült elmenteni a változásokat! Próbálja később");
+            new Alerts().ErrorAlert("Mentési hiba", "Nem sikerült elmenteni a változásokat! Próbálja később");
             return;
         }
         new Alerts().InformationAlert("Rendszergazda értesítve", "Kérjük várja meg, míg a rendszergazda beállít egy ideiglenes jelszót!");
@@ -62,48 +61,45 @@ public class LoginController {
     }
 
     void loginCheck(String username, String password) throws Exception {
-        if(username.isEmpty() || password.isEmpty()) {
+        if (username.isEmpty() || password.isEmpty()) {
             new Alerts().LoginAlert("Kötelező kitölteni mindkét mezőt!");
             return;
         }
         //Checking if they are in the system:
         User user = JavaFXMain.manager.getUser(username);
         if (user == null) {
-            new Alerts().LoginAlert("Nem létezik "+username+" nevű felhasználó!");
+            new Alerts().LoginAlert("Nem létezik " + username + " nevű felhasználó!");
             return;
         }
         if (!user.checkPassword(password)) {
             new Alerts().LoginAlert("Hibás bejelentkezési adatok!");
             return;
         }
-        if (user.isResetPassword())
-        {
+        if (user.isResetPassword()) {
             new Alerts().ResetPasswordAlert(user);
             this.password.setText("");
             return;
         }
-        if (user.isFirstLogin())
-        {
+        if (user.isFirstLogin()) {
             new Alerts().FirstLoginAlert(user);
             this.password.setText("");
             return;
         }
-        if (user.getUsertype().name().equals("MANAGER"))
-        {
+        if (user.getUsertype().name().equals("MANAGER")) {
             startManager((Stage) login_button.getScene().getWindow(), user);
-        }
-        else{
-            startDoctor((Stage) login_button.getScene().getWindow());
+        } else {
+            startDoctor((Stage) login_button.getScene().getWindow(), user);
         }
     }
 
-    public void startDoctor(Stage stage) throws Exception{
+    public void startDoctor(Stage stage, User user) throws Exception {
         try {
-            // Load the DoctorFXML file
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml_files/DoctorFXML.fxml"));
             Parent root = fxmlLoader.load();
 
-            // Create a new stage and set the scene
+            DoctorController doctorcontroller = fxmlLoader.getController();
+            doctorcontroller.setLoggedInUser(user);
+
             Stage doctorStage = new Stage();
             doctorStage.setTitle("BAU Doktor nézet");
             doctorStage.setScene(new Scene(root));
@@ -113,7 +109,6 @@ public class LoginController {
 
             doctorStage.show();
 
-            // Close the current stage (Login)
             stage.close();
         } catch (IOException e) {
             System.err.println("Error loading DoctorFXML: " + e.getMessage());
@@ -143,6 +138,4 @@ public class LoginController {
             e.printStackTrace();
         }
     }
-
-
 }

@@ -2,9 +2,7 @@ package hu.unideb.inf.sfm.bau_javafx.frontend;
 
 import hu.unideb.inf.sfm.bau_javafx.db.Manager;
 import hu.unideb.inf.sfm.bau_javafx.db.SpringManager;
-import hu.unideb.inf.sfm.bau_javafx.model.User;
 import javafx.application.Application;
-import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -23,7 +21,7 @@ public class JavaFXMain extends Application {
         stage.setScene(scene);
         scene.setFill(Color.TRANSPARENT);
         Rectangle clip = new Rectangle(scene.getWidth(), scene.getHeight());
-        clip.setArcWidth(40); // Rounding corners
+        clip.setArcWidth(40);
         clip.setArcHeight(40);
         root.setClip(clip);
         stage.initStyle(StageStyle.TRANSPARENT);

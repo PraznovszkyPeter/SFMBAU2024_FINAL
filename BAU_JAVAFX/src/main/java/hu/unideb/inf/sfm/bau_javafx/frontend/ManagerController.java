@@ -5,14 +5,12 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.*;
-import javafx.scene.image.Image;
-import javafx.stage.Stage;
-import java.io.IOException;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import java.util.List;
+import static hu.unideb.inf.sfm.bau_javafx.frontend.UserEditor.UserEdit;
 
 public class ManagerController {
     @FXML
@@ -52,35 +50,37 @@ public class ManagerController {
 
     @FXML
     void showMyData(ActionEvent event) throws Exception {
-        UserEdit(loggedInUser.getUsername() + " adatainak változtatása", loggedInUser);
+        UserEdit(getClass(),loggedInUser.getUsername() + " adatainak változtatása", loggedInUser);
     }
 
     @FXML
     public void initialize() {
-        // Set up TableView columns and bindings
         forenameColumn.setCellValueFactory(cellData -> cellData.getValue().forenameProperty());
         surnameColumn.setCellValueFactory(cellData -> cellData.getValue().surnameProperty());
         userTable.setItems(users);
 
-        // Add listener for table selection
         userTable.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             showUserDetails(newValue);
         });
 
-        // Disable reset button initially
         resetButton.setDisable(true);
     }
 
     @FXML
     void CreateUser(ActionEvent event) throws Exception {
-        UserEdit("Új felhasználó létrehozása", null);
+        UserEdit(getClass(),"Új felhasználó létrehozása", null);
     }
 
     @FXML
     void DeleteUser(ActionEvent event) {
         User selectedUser = userTable.getSelectionModel().getSelectedItem();
         if (selectedUser != null) {
-            JavaFXMain.manager.DeleteUser(selectedUser);
+            if (JavaFXMain.manager.DeleteUser(selectedUser)){
+                new Alerts().InformationAlert("Felhasználó törlés", "Sikeresen törölve lett a felhasználó!");
+            }
+            else {
+                new Alerts().ErrorAlert("Felhasználó törlés", "Nem sikerült a felhasználó törlése!");
+            }
         }
         this.reloadUsers();
     }
@@ -89,7 +89,7 @@ public class ManagerController {
     void EditUser(ActionEvent event) throws Exception {
         User selectedUser = userTable.getSelectionModel().getSelectedItem();
         if (selectedUser != null) {
-            UserEdit(selectedUser.getUsername() + " szerkesztése", selectedUser);
+            UserEdit(getClass(),selectedUser.getUsername() + " szerkesztése", selectedUser);
         }
     }
 
@@ -133,37 +133,10 @@ public class ManagerController {
         }
     }
 
-    public void UserEdit(String header, User selected) throws Exception {
-        try {
-            // Load the UserEditorFXML file
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml_files/UserEditorFXML.fxml"));
-
-            // Load the FXML into a Parent root node
-            Parent root = fxmlLoader.load();
-
-            // Get the controller that was injected by FXMLLoader
-            UserEditorController controller = fxmlLoader.getController();
-
-            controller.setUser(selected);
-
-            Stage managerStage = new Stage();
-            managerStage.setTitle(header);
-            managerStage.setScene(new Scene(root));
-
-            Image image = new Image(getClass().getResourceAsStream("/images/baulog.png"));
-            managerStage.getIcons().add(image);
-            // Show the stage (open the window)
-            managerStage.show();
-        } catch (IOException e) {
-            System.err.println("Error loading UserEditorFXML: " + e.getMessage());
-            e.printStackTrace();
-        }
-    }
-
     public void reloadUsers() {
         users.clear();
 
-        List<User> updatedUserList = JavaFXMain.manager.getUsers(loggedInUser.getUsername());
+        List<User> updatedUserList = JavaFXMain.manager.getUsers(this.loggedInUser.getUsername());
 
         if (updatedUserList != null) {
             users.setAll(updatedUserList);
