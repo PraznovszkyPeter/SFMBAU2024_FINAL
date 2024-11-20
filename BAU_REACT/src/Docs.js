@@ -1,9 +1,8 @@
 import './index';
+import './docs.css'
 import vet1 from './images/vet1.jpg';
 import vet2 from './images/vet2.jpg';
 import vet3 from './images/vet3.jpg';
-
-
 import { useState } from "react";
 
     document.title = "Docs";
@@ -19,7 +18,7 @@ const Docs = () => {
         <div className="orvosok">
         {docs.map((doc) => (
             <div key={doc.id}>
-                <h2>{doc.nev}</h2>
+                <h2 className='orvos-neve'>{doc.nev}</h2>
                 <p>Szakterület: {doc.szakterulet}</p>
                 <p>Mobil: {doc.telefonszam}</p>
                 <p>Email: {doc.email}</p>
@@ -31,8 +30,7 @@ const Docs = () => {
             </div>
         ))}
     </div>
-    
-        );
+    );
     
    
 }

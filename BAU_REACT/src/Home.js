@@ -18,7 +18,6 @@ const Home = () => {
                 style={{
                     width: "325px",
                     marginBottom: "1.5rem",
-                   // boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)",
                 }}
             />
 

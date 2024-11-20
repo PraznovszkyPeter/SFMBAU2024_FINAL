@@ -15,7 +15,7 @@ const Reservation = () => {
     const [selectedTime, setSelectedTime] = useState("");
     const history = useHistory();
 
-       const availableTimes = ["10:00", "14:00", "16:00"];
+    const availableTimes = ["10:00", "14:00", "16:00"];
 
     const handleSubmit = (event) => {
         event.preventDefault();

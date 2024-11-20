@@ -1,4 +1,5 @@
 import {Link} from 'react-router-dom';
+import './navbar.css';
 
 const Nav = () => {
     return (  
@@ -6,8 +7,8 @@ const Nav = () => {
             <div className='linkek'>
                 <p><b>B</b>AU</p>
                 <Link to = '/' className = "link">Főoldal</Link>
-                <Link to = '/docs'>Orvosok</Link>      
-                <Link to = '/reservation'>Foglalás</Link>    
+                <Link to = '/docs' className = "link">Orvosok</Link>      
+                <Link to = '/reservation' className = "link">Foglalás</Link>    
             </div>
             
         </nav>
