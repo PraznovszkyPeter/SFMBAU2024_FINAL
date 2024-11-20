@@ -54,7 +54,7 @@ public class User {
         this.password = BCrypt.hashpw(password, BCrypt.gensalt(12));
         this.surname = surname;
         this.forename = forename;
-        this.registrationNumber = registrationNumber;
+        this.registrationNumber = usertype.equals(usertype.MANAGER) ? null : registrationNumber;
         this.usertype = usertype;
         this.firstLogin = true;
         this.resetPassword = false;
@@ -93,7 +93,7 @@ public class User {
 
     public Integer getRegistrationNumber() { return registrationNumber; }
     public void setRegistrationNumber(Integer registrationNumber) {
-        this.registrationNumber = registrationNumber;
+        this.registrationNumber = this.usertype.equals(usertype.MANAGER) ? null : registrationNumber;
         if (registrationNumberProperty != null) this.registrationNumberProperty.set(registrationNumber);
     }
 
@@ -106,7 +106,10 @@ public class User {
     public User.usertype getUsertype() { return usertype; }
     public void setUsertype(User.usertype usertype) {
         this.usertype = usertype;
-        if (usertypeProperty != null) this.usertypeProperty.set(usertype);
+        if (this.usertype.equals(usertype.MANAGER)) {
+            this.setRegistrationNumber(null);
+        }
+        this.usertypeProperty.set(usertype);
     }
 
     public boolean isFirstLogin() {
@@ -164,14 +167,5 @@ public class User {
             usertypeProperty.addListener((observable, oldValue, newValue) -> setUsertype(newValue));
         }
         return usertypeProperty;
-    }
-
-    public BooleanProperty firstLoginProperty() {
-        if (firstLoginProperty == null) {
-            firstLoginProperty = new SimpleBooleanProperty(firstLogin);
-            // Listen for changes to firstLoginProperty and perform actions accordingly
-            firstLoginProperty.addListener((observable, oldValue, newValue) -> setResetPassword(newValue));
-        }
-        return firstLoginProperty;
     }
 }
