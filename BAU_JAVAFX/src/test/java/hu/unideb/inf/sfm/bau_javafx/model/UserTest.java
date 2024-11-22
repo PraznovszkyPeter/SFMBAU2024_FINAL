@@ -1,11 +1,8 @@
 package hu.unideb.inf.sfm.bau_javafx.model;
 
 import static org.junit.jupiter.api.Assertions.*;
-
-import javafx.beans.property.BooleanProperty;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mindrot.jbcrypt.BCrypt;
 
 public class UserTest {
     private User doctor;

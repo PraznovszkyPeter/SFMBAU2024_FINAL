@@ -8,9 +8,12 @@ import hu.unideb.inf.sfm.bau_javafx.model.User;
 import hu.unideb.inf.sfm.bau_javafx.model.UserRepository;
 import org.springframework.boot.SpringApplication;
 import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.stereotype.Component;
+
 import javax.mail.MessagingException;
 import java.util.List;
 
+@Component
 public class SpringManager implements Manager{
 
     private ConfigurableApplicationContext context;
@@ -43,8 +46,11 @@ public class SpringManager implements Manager{
     public boolean DeleteUser(User user) {
         UserRepository userRepository = (UserRepository) context.getBean(UserRepository.class);
         try {
-            userRepository.delete(user);
-            return true;
+            if (userRepository.findByUsername(user.getUsername()) != null) {
+                userRepository.delete(user);
+                return true;
+            }
+            return false;
         } catch (Exception e) {
             return false;
         }
@@ -66,8 +72,11 @@ public class SpringManager implements Manager{
     public boolean DeleteAppointment(Appointment appointment) {
         AppointmentRepository appointmentRepository = (AppointmentRepository) context.getBean(AppointmentRepository.class);
         try {
-            appointmentRepository.delete(appointment);
-            return true;
+            if (appointmentRepository.findByAppointmentDate(appointment.getAppointmentDate()) != null) {
+                appointmentRepository.delete(appointment);
+                return true;
+            }
+            return false;
         } catch (Exception e) {
             return false;
         }
