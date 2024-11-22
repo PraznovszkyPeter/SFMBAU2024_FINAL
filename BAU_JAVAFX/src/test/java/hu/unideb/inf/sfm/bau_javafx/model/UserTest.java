@@ -148,6 +148,4 @@ public class UserTest {
         doctor.setResetPassword(true);
         assertTrue(doctor.isResetPassword());
     }
-
-
 }
