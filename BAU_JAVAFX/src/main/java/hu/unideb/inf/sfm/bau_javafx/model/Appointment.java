@@ -1,6 +1,8 @@
 package hu.unideb.inf.sfm.bau_javafx.model;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.Id;
 import lombok.Builder;
 
@@ -14,6 +16,7 @@ public class Appointment {
     private LocalDateTime appointmentDate;
     private String species;
     private int numberOfAnimals;
+    @Enumerated(EnumType.STRING)
     private examination examinationType;
     private String comment;
     private String keeperName;
