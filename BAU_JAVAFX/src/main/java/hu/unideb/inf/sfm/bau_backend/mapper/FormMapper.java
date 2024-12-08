@@ -9,9 +9,12 @@ public class FormMapper {
 
     public static FormEntity FormDtoToFormEntity(FormDto formDto) {
         FormEntity formEntity = FormEntity.builder()
-                .faj(formDto.faj())
                 .panasz(formDto.panasz())
-                .datum(LocalDate.parse(formDto.datum()))
+                .faj(formDto.faj())
+                .gazdi_name(formDto.gazdi_name())
+                .email(formDto.email())
+                .phone_num(formDto.phone_num())
+                .datum(formDto.datum())
                 .idopont(formDto.idopont()).build();
 
         return formEntity;

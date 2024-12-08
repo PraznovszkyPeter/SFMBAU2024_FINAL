@@ -18,11 +18,14 @@ public class FormEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) //egyesével növeli az Id-t
-    private Integer id;
+    private long id;
+    private String datum;
     private String panasz;
     private String faj;
-    private LocalDate datum;
-    private String idopont; //megnezni hogy jo e String kent hasznalni
+    private String email;
+    private String gazdi_name;
+    private String phone_num;
+    private String idopont;
 
 
 
