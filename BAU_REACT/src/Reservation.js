@@ -55,6 +55,11 @@ const Reservation = () => {
                 </label>
 
                 <label className="reservation-label">
+                    Gazdi neve:
+                    <input type="text" onChange={handleInput} name="gazdi_name" className="reservation-input"/>
+                </label>
+
+                <label className="reservation-label">
                     Faj:
                     <input type="text" onChange={handleInput} name="faj" className="reservation-input"/>
                 </label>
