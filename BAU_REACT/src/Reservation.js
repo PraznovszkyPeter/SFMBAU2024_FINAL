@@ -60,6 +60,16 @@ const Reservation = () => {
                 </label>
 
                 <label className="reservation-label">
+                    E-mail cím:
+                    <input type="text" onChange={handleInput} name="email" className="reservation-input"/>
+                </label>
+
+                <label className="reservation-label">
+                    Telefonszám:
+                    <input type="text" onChange={handleInput} name="phone_num" className="reservation-input"/>
+                </label>
+
+                <label className="reservation-label">
                     Faj:
                     <input type="text" onChange={handleInput} name="faj" className="reservation-input"/>
                 </label>
