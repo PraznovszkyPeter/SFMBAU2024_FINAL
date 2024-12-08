@@ -45,6 +45,32 @@ const Reservation = () => {
         history.push("/");
     };
 
+    useEffect(() => {
+
+        const dates = 5; 
+        const baseYear = "2024";
+
+
+        for(let i = 0; i < dates; i++) {
+
+            const month = Math.floor(Math.random() * 12) + 1;
+            const day = Math.floor(Math.random() * 31) + 1;
+    
+            const date = `${baseYear}-${month.toString().padStart(2, '0')}-${day.toString().padStart(2, '0')}`;
+
+            if(availableDates.includes(date)) {
+                i--;
+                continue;
+            }
+            else {
+                availableDates.push(date);
+            }
+            
+        }
+        
+        setDates(availableDates);
+    }, []);
+
     return (
         <div className="reservation-wrapper">
             <h2 className="reservation-heading">Foglaljon időpontot még ma!</h2>
