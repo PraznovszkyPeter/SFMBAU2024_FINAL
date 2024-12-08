@@ -48,3 +48,26 @@
     transition: background-color 0.3s, transform 0.2s;
 }
 
+/* Alapértelmezett stílusok a dropdown-hoz */
+.reservation-select {
+    appearance: none; /* Alapértelmezett stílus eltávolítása */
+    -webkit-appearance: none; /* Safari támogatás */
+    -moz-appearance: none; /* Firefox támogatás */
+    background-color: #f9f9f9; /* Világos háttérszín */
+    border: 1px solid #ccc; /* Vékony szegély */
+    border-radius: 5px; /* Lekerekített sarkok */
+    padding: 10px 15px; /* Belső margó */
+    font-size: 16px; /* Olvasható betűméret */
+    font-family: 'Arial', sans-serif; /* Modern betűtípus */
+    color: #333; /* Sötétszürke szöveg */
+    width: 100%; /* Reszponzív szélesség */
+    max-width: 400px; /* Maximális szélesség */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Finom árnyék */
+    transition: border-color 0.3s ease, box-shadow 0.3s ease; /* Animáció */
+}
+
+/* Hover (eger fölé visz) állapot */
+.reservation-select:hover {
+    border-color: #888; /* Sötétebb szegély */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15); /* Erősebb árnyék */
+}

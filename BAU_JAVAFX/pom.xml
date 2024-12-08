@@ -70,9 +70,19 @@
             <version>1.6.2</version>
         </dependency>
         <dependency>
+<<<<<<< HEAD
             <groupId>org.jacoco</groupId>
             <artifactId>jacoco-maven-plugin</artifactId>
             <version>0.8.12</version>
+=======
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-devtools</artifactId>
+            <scope>runtime</scope>
+>>>>>>> backend_react
         </dependency>
     </dependencies>
 
