@@ -19,6 +19,8 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.stream.Collectors;
+
 import static hu.unideb.inf.sfm.bau_javafx.frontend.UserEditor.UserEdit;
 
 public class DoctorController {
@@ -26,7 +28,7 @@ public class DoctorController {
     private Label animalSpecies;
 
     @FXML
-    private Label comments;
+    private Label animalComplaint;
 
     @FXML
     private Label keeperEmail;
@@ -36,12 +38,6 @@ public class DoctorController {
 
     @FXML
     private Label keeperName;
-
-    @FXML
-    private Label numberOfAnimals;
-
-    @FXML
-    private Label requestedInspcetion;
 
     @FXML
     private TableView<Appointment> appointmentTable;
@@ -73,7 +69,7 @@ public class DoctorController {
 
     @FXML
     void EditMyData(ActionEvent event) throws Exception {
-        UserEdit(getClass(),this.loggedInUser.getUsername() + " adatainak változtatása", this.loggedInUser);
+        UserEdit(getClass(),this.loggedInUser.getUsername() + " adatainak változtatása", this.loggedInUser, null);
     }
 
     @FXML
@@ -104,9 +100,7 @@ public class DoctorController {
 
     public void showAppointmentDetails(Appointment appointment) {
         animalSpecies.setText("");
-        numberOfAnimals.setText("");
-        requestedInspcetion.setText("");
-        comments.setText("");
+        animalComplaint.setText("");
         keeperName.setText("");
         keeperEmail.setText("");
         keeperMobile.setText("");
@@ -114,9 +108,7 @@ public class DoctorController {
 
         if (appointment != null) {
             animalSpecies.setText(appointment.getSpecies());
-            numberOfAnimals.setText(Integer.toString(appointment.getNumberOfAnimals()));
-            requestedInspcetion.setText(appointment.getExaminationType().toString());
-            comments.setText(appointment.getComment());
+            animalComplaint.setText(appointment.getComplaint());
             keeperName.setText(appointment.getKeeperName());
             keeperEmail.setText(appointment.getEmail());
             keeperMobile.setText(appointment.getPhoneNumber());

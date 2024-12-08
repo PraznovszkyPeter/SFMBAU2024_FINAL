@@ -15,27 +15,18 @@ public class Appointment {
     @Id
     private LocalDateTime appointmentDate;
     private String species;
-    private int numberOfAnimals;
-    @Enumerated(EnumType.STRING)
-    private examination examinationType;
-    private String comment;
+    private String complaint;
     private String keeperName;
     private String email;
     private String phoneNumber;
 
-    public enum examination {
-        BETEGVIZSGALAT, VEMHESSEGVIZSGALAT, VEDOOLTAS
-    }
-
     public Appointment() {
     }
 
-    public Appointment(LocalDateTime appointmentDate, String species, int numberOfAnimals, examination examinationType, String comment, String keeperName, String email, String phoneNumber) {
+    public Appointment(LocalDateTime appointmentDate, String species, String complaint, String keeperName, String email, String phoneNumber) {
         this.appointmentDate = appointmentDate;
         this.species = species;
-        this.numberOfAnimals = numberOfAnimals;
-        this.examinationType = examinationType;
-        this.comment = comment;
+        this.complaint = complaint;
         this.keeperName = keeperName;
         this.email = email;
         this.phoneNumber = phoneNumber;
@@ -55,30 +46,6 @@ public class Appointment {
 
     public void setSpecies(String species) {
         this.species = species;
-    }
-
-    public int getNumberOfAnimals() {
-        return numberOfAnimals;
-    }
-
-    public void setNumberOfAnimals(int numberOfAnimals) {
-        this.numberOfAnimals = numberOfAnimals;
-    }
-
-    public examination getExaminationType() {
-        return examinationType;
-    }
-
-    public void setExaminationType(examination examinationType) {
-        this.examinationType = examinationType;
-    }
-
-    public String getComment() {
-        return comment;
-    }
-
-    public void setComment(String comment) {
-        this.comment = comment;
     }
 
     public String getKeeperName() {
@@ -103,5 +70,13 @@ public class Appointment {
 
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
+    }
+
+    public String getComplaint() {
+        return complaint;
+    }
+
+    public void setComplaint(String complaint) {
+        this.complaint = complaint;
     }
 }

@@ -50,7 +50,7 @@ public class ManagerController {
 
     @FXML
     void showMyData(ActionEvent event) throws Exception {
-        UserEdit(getClass(),loggedInUser.getUsername() + " adatainak változtatása", loggedInUser);
+        UserEdit(getClass(),loggedInUser.getUsername() + " adatainak változtatása", loggedInUser, this);
     }
 
     @FXML
@@ -68,7 +68,7 @@ public class ManagerController {
 
     @FXML
     void CreateUser(ActionEvent event) throws Exception {
-        UserEdit(getClass(),"Új felhasználó létrehozása", null);
+        UserEdit(getClass(),"Új felhasználó létrehozása", null, this);
     }
 
     @FXML
@@ -89,7 +89,7 @@ public class ManagerController {
     void EditUser(ActionEvent event) throws Exception {
         User selectedUser = userTable.getSelectionModel().getSelectedItem();
         if (selectedUser != null) {
-            UserEdit(getClass(),selectedUser.getUsername() + " szerkesztése", selectedUser);
+            UserEdit(getClass(),selectedUser.getUsername() + " szerkesztése", selectedUser, this);
         }
     }
 

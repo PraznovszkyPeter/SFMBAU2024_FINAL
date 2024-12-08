@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
@@ -8,10 +9,11 @@
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="600.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hu.unideb.inf.sfm.bau_javafx.frontend.AppointmentCloserController">
+<AnchorPane prefHeight="600.0" prefWidth="400.0" style="-fx-background-color: lightblue;" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hu.unideb.inf.sfm.bau_javafx.frontend.AppointmentCloserController">
    <children>
-      <GridPane layoutX="100.0" layoutY="129.0" prefHeight="600.0" prefWidth="400.0" AnchorPane.bottomAnchor="100.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <GridPane layoutX="100.0" layoutY="129.0" prefHeight="600.0" prefWidth="400.0" AnchorPane.bottomAnchor="100.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="2.0" AnchorPane.topAnchor="0.0">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -22,14 +24,35 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Label text="Címzett:" />
-            <Label text="Vizsgálat eredménye:" GridPane.rowIndex="1" />
-            <Label text="Megjegyzés:" GridPane.rowIndex="2" />
-            <TextArea fx:id="commentArea" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <Label text="Címzett:">
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font></Label>
+            <Label text="Vizsgálat eredménye:" GridPane.rowIndex="1">
+               <font>
+                  <Font name="System Bold" size="19.0" />
+               </font></Label>
+            <Label text="Megjegyzés:" GridPane.rowIndex="2">
+               <font>
+                  <Font size="20.0" />
+               </font></Label>
+            <TextArea fx:id="commentArea" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+               <GridPane.margin>
+                  <Insets />
+               </GridPane.margin>
+               <font>
+                  <Font size="15.0" />
+               </font></TextArea>
             <ComboBox fx:id="appointmentTypes" prefWidth="150.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
-            <Label fx:id="emailAddress" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+            <Label fx:id="emailAddress" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+               <font>
+                  <Font size="16.0" />
+               </font></Label>
          </children>
       </GridPane>
-      <Button fx:id="sendButton" contentDisplay="CENTER" layoutX="174.0" layoutY="542.0" mnemonicParsing="false" onAction="#sendMail" text="Küldés" />
+      <Button fx:id="sendButton" contentDisplay="CENTER" layoutX="155.0" layoutY="542.0" mnemonicParsing="false" onAction="#sendMail" style="-fx-background-color: lightyellow;" text="Küldés" textFill="#663399">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font></Button>
    </children>
 </AnchorPane>

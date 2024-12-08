@@ -2,6 +2,7 @@ package hu.unideb.inf.sfm.bau_javafx.frontend;
 
 import hu.unideb.inf.sfm.bau_javafx.db.Manager;
 import hu.unideb.inf.sfm.bau_javafx.db.SpringManager;
+import hu.unideb.inf.sfm.bau_javafx.model.User;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;

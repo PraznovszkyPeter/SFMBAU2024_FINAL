@@ -9,7 +9,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class UserEditor {
-    public static void UserEdit(Class<?> clas, String header, User selected) throws Exception {
+    public static void UserEdit(Class<?> clas, String header, User selected, ManagerController managerController) throws Exception {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(clas.getResource("/fxml_files/UserEditorFXML.fxml"));
 
@@ -18,6 +18,7 @@ public class UserEditor {
             UserEditorController controller = fxmlLoader.getController();
 
             controller.setUser(selected);
+            controller.setManagerController(managerController);
 
             Stage managerStage = new Stage();
             managerStage.setTitle(header);

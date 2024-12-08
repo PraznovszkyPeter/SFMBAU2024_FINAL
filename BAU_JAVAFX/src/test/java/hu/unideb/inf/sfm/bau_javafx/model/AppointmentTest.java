@@ -12,7 +12,7 @@ public class AppointmentTest {
 
     @BeforeEach
     void setUp() {
-        appointment = new Appointment(LocalDateTime.of(2024, 11, 22, 9, 30), "kutya", 2, Appointment.examination.VEMHESSEGVIZSGALAT, "", "Gipsz Jakab", "gipsz@minta.hu", "061234567");
+        appointment = new Appointment(LocalDateTime.of(2024, 11, 22, 9, 30), "kutya", "fáj a lába","Gipsz Jakab", "gipsz@minta.hu", "061234567");
     }
 
     @Test
@@ -37,27 +37,11 @@ public class AppointmentTest {
     }
 
     @Test
-    void testNumberOfAnimals() {
-        assertEquals(2, appointment.getNumberOfAnimals());
+    void testComplaint() {
+        assertEquals("fáj a lába", appointment.getComplaint());
 
-        appointment.setNumberOfAnimals(appointment.getNumberOfAnimals() + 1);
-        assertEquals(3, appointment.getNumberOfAnimals());
-    }
-
-    @Test
-    void testExaminationType() {
-        assertEquals(Appointment.examination.VEMHESSEGVIZSGALAT, appointment.getExaminationType());
-
-        appointment.setExaminationType(Appointment.examination.BETEGVIZSGALAT);
-        assertEquals(Appointment.examination.BETEGVIZSGALAT, appointment.getExaminationType());
-    }
-
-    @Test
-    void testComment() {
-        assertEquals("", appointment.getComment());
-
-        appointment.setComment("Az ipafai papnak fapipája van, ezért az ipafai fapipa - papi fapipa.");
-        assertEquals("Az ipafai papnak fapipája van, ezért az ipafai fapipa - papi fapipa.", appointment.getComment());
+        appointment.setComplaint("Az ipafai papnak fapipája van, ezért az ipafai fapipa - papi fapipa.");
+        assertEquals("Az ipafai papnak fapipája van, ezért az ipafai fapipa - papi fapipa.", appointment.getComplaint());
     }
 
     @Test

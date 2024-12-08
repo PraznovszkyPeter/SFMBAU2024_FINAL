@@ -119,7 +119,7 @@ public class SpringManagerTest {
 
     @Test
     void testDeleteAppointment() {
-        Appointment appointment = new Appointment(LocalDateTime.now(), "kutya", 2, Appointment.examination.VEMHESSEGVIZSGALAT, "", "Gipsz Jakab", "gipsz@minta.hu", "061234567");
+        Appointment appointment = new Appointment(LocalDateTime.now(), "kutya", "fáj a lába","Gipsz Jakab", "gipsz@minta.hu", "061234567");
         appointmentRepository.save(appointment);
         boolean deleted = springManager.DeleteAppointment(appointment);
         assertTrue(deleted);
@@ -133,7 +133,7 @@ public class SpringManagerTest {
     void testGetAppointments() {
         int count = springManager.getAppointments().size();
 
-        Appointment appointment = new Appointment(LocalDateTime.now(), "kutya", 2, Appointment.examination.VEMHESSEGVIZSGALAT, "", "Gipsz Jakab", "gipsz@minta.hu", "061234567");
+        Appointment appointment = new Appointment(LocalDateTime.now(), "kutya", "fáj a lába","Gipsz Jakab", "gipsz@minta.hu", "061234567");
         appointmentRepository.save(appointment);
 
         assertEquals(count+1, springManager.getAppointments().size());

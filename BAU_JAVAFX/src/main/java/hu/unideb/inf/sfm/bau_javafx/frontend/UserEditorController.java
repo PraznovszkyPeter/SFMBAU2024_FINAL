@@ -31,11 +31,16 @@ public class UserEditorController {
     private Button saveButton;
 
     private User user = null;
+    ManagerController managerController;
 
     @FXML
     void Cancel(ActionEvent event) {
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.close();
+    }
+
+    public void setManagerController(ManagerController managerController) {
+        this.managerController = managerController;
     }
 
     @FXML
@@ -51,8 +56,9 @@ public class UserEditorController {
         }
 
         JavaFXMain.manager.saveUser(this.user);
-        ManagerController managerController = new ManagerController();
-        managerController.reloadUsers();
+        if (managerController != null) {
+            managerController.reloadUsers();
+        }
 
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.close();

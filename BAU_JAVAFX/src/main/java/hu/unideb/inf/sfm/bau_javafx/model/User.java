@@ -103,13 +103,12 @@ public class User {
         if (resetPasswordProperty != null) this.resetPasswordProperty.set(resetPassword);
     }
 
-    public User.usertype getUsertype() { return usertype; }
+    public User.usertype getUsertype() { return this.usertype; }
     public void setUsertype(User.usertype usertype) {
         this.usertype = usertype;
-        if (this.usertype.equals(usertype.MANAGER)) {
-            this.setRegistrationNumber(null);
+        if (usertypeProperty != null) {
+            this.usertypeProperty.set(usertype);
         }
-        this.usertypeProperty.set(usertype);
     }
 
     public boolean isFirstLogin() {

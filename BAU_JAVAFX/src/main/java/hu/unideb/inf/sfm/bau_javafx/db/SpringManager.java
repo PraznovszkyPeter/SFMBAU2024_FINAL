@@ -9,8 +9,9 @@ import hu.unideb.inf.sfm.bau_javafx.model.UserRepository;
 import org.springframework.boot.SpringApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.stereotype.Component;
-
 import javax.mail.MessagingException;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Component
@@ -85,7 +86,12 @@ public class SpringManager implements Manager{
     @Override
     public List<Appointment> getAppointments() {
         AppointmentRepository appointmentRepository = (AppointmentRepository) context.getBean(AppointmentRepository.class);
-        return appointmentRepository.findAll();
+
+        LocalDate local=LocalDate.now();
+        LocalDateTime today = local.atStartOfDay();
+        LocalDateTime tomorrow = local.plusDays(1).atStartOfDay();
+        
+        return appointmentRepository.findAllTodayAppointment(today, tomorrow);
     }
 
     @Override
